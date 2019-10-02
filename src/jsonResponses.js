@@ -31,10 +31,10 @@ const getUsersMeta = (request, response) => {
 
 const addUser = (request, response, body) => {
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'Team Name and 6 Pokemon are required.',
   };
 
-  if (!body.name || !body.age) {
+  if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3 || !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -48,10 +48,15 @@ const addUser = (request, response, body) => {
   }
 
   users[body.name].name = body.name;
-  users[body.name].age = body.age;
+  users[body.name].pokemon1 = body.pokemon1;
+  users[body.name].pokemon2 = body.pokemon2;
+  users[body.name].pokemon3 = body.pokemon3;
+  users[body.name].pokemon4 = body.pokemon4;
+  users[body.name].pokemon5 = body.pokemon5;
+  users[body.name].pokemon6 = body.pokemon6;
 
   if (responseCode === 201) {
-    responseJSON.message = 'Created Successfully';
+    responseJSON.message = 'Team Created Successfully';
     return respondJSON(request, response, responseCode, responseJSON);
   }
 

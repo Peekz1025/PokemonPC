@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Our simple HTTP server</title>
+  <title>PokemonPC</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-  <script type="text/babel">
 
-const handleResponse = (xhr, parseResponse) => {
+  <script type="text/babel">
+    const handleResponse = (xhr, parseResponse) => {
       const content = document.querySelector('#content');
       switch(xhr.status) {
         case 200: //if success
@@ -38,12 +37,14 @@ const handleResponse = (xhr, parseResponse) => {
       }
     };
     const requestUpdate = (e, userForm) => {
-      const url = userForm.querySelector('#urlField').value;
-      const method = userForm.querySelector('#methodSelect').value;
+      //const url = userForm.querySelector('#urlField').value;
+      //change to head to perform a head request instead
+      const method = 'get';
       
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method, '/getUsers');
       xhr.setRequestHeader('Accept', 'application/json');
+		
       if(method == 'get') {
         xhr.onload = () => handleResponse(xhr, true);
       } else {
@@ -61,20 +62,35 @@ const handleResponse = (xhr, parseResponse) => {
       userForm.addEventListener('submit', getUsers);
     };
     window.onload = init;
-
   </script>
+
 </head>
 <body>
   <section id="top">
-    <h3>POST Status Code Tests</h3>
+    <h2>The Pokemon PC</h2>
+	<h3>Pokemon Team Storage</h3>
     <form id="nameForm" action="/addUser" method="post">
-      <label for="name">Name: </label>
+      <label for="name">Team Name </label>
       <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-      <input type="submit" value="Add User" />
+
+      <label for="pokemon1">Pokemon 1 </label>
+      <input id="pokeField1" type="text" name="pokemon1" />
+      <label for="pokemon2">Pokemon 2 </label>
+      <input id="pokeField2" type="text" name="pokemon2" />
+      <label for="pokemon3">Pokemon 3 </label>
+      <input id="pokeField3" type="text" name="pokemon3" />
+      <label for="pokemon4">Pokemon 4 </label>
+      <input id="pokeField4" type="text" name="pokemon4" />
+      <label for="pokemon5">Pokemon 5 </label>
+      <input id="pokeField5" type="text" name="pokemon5" />
+      <label for="pokemon6">Pokemon 6 </label>
+      <input id="pokeField6" type="text" name="pokemon6" />
+
+      <input type="submit" value="Submit Team" />
     </form>
+
     <form id="userForm" action="/getUsers" method="get">
+<!--
       <select id='urlField'>
         <option value='/getUsers'>/getUsers</option>
         <option value='/notReal'>/notReal</option>
@@ -83,8 +99,10 @@ const handleResponse = (xhr, parseResponse) => {
         <option value="get">GET</option>
         <option value="head">HEAD</option>
       </select>
-      <input type="submit" value="Get User" />
+-->
+      <input type="submit" value="Search" />
     </form>
+	  
   </section>
   <section id="content">
   </section>
