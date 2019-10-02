@@ -1,0 +1,26 @@
+{
+  "name": "PokemonPC",
+  "version": "1.0.0",
+  "description": "a pokemon team storage app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests Complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Peekz1025/PokemonPC.git"
+  },
+  "author": "Robby Piwko",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Peekz1025/PokemonPC/issues"
+  },
+  "homepage": "https://github.com/Peekz1025/PokemonPC#readme",
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
