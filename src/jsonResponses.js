@@ -31,13 +31,23 @@ const getUsersMeta = (request, response) => {
 
 const addUser = (request, response, body) => {
   const responseJSON = {
-    message: 'Team Name and 6 Pokemon are required.',
+    message: 'Team Name and 6 Pokemon are required',
   };
 
   if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3 || !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
+
+  //check for duplicate team names
+  let i;
+  for(i = 0; i < users.length; i++){
+    if (users[i].name === users[body.name].name) {
+      responseJSON.id = 'missingParams duplicate name';
+      return respondJSON(request, response, 400, responseJSON);
+    }
+  }
+  
 
   let responseCode = 201;
 
