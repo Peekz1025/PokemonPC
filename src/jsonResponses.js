@@ -20,6 +20,8 @@ const getUsers = (request, response) => {
   const responseJSON = {
     users,
   };
+	//check for team names
+	//check for specific pokemon
   respondJSON(request, response, 200, responseJSON);
 };
 
@@ -40,12 +42,9 @@ const addUser = (request, response, body) => {
   }
 
   //check for duplicate team names
-  let i;
-  for(i = 0; i < users.length; i++){
-    if (users[i].name === users[body.name].name) {
-      responseJSON.id = 'missingParams duplicate name';
-      return respondJSON(request, response, 400, responseJSON);
-    }
+  if (users[body.name]) {
+    responseJSON.id = 'Team Name has been used already. Please choose another name.';
+    return respondJSON(request, response, 400, responseJSON);
   }
   
 

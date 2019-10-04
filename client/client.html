@@ -42,7 +42,8 @@
       const method = 'get';
       
       const xhr = new XMLHttpRequest();
-      xhr.open(method, '/getUsers');
+		
+      xhr.open(method, '/getUsers');//getusers' + '?' + intextbox
       xhr.setRequestHeader('Accept', 'application/json');
 		
       if(method == 'get') {
