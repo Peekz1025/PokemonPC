@@ -36,7 +36,8 @@ const addUser = (request, response, body) => {
     message: 'Team Name and 6 Pokemon are required',
   };
 
-  if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3 || !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
+  if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3
+  || !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
