@@ -16,13 +16,28 @@ const respondJSONMeta = (request, response, status) => {
 };
 
 
-const getUsers = (request, response) => {
-  const responseJSON = {
-    users,
-  };
-	//check for team names
-	//check for specific pokemon
-  respondJSON(request, response, 200, responseJSON);
+const getUsers = (request, response, params) => {
+  // check for team names
+  // check for specific pokemon
+  const returnTeams = {};
+
+  const keys = Object.keys(users);
+
+  // loops through the users and checks if there is a team with those
+  for (let i = 0; i < keys.length; i++) {
+    // if the search bar had a pokemon
+    if (users[keys[i]].pokemon1 === params[''] || users[keys[i]].pokemon2 === params['']
+       || users[keys[i]].pokemon3 === params[''] || users[keys[i]].pokemon4 === params['']
+       || users[keys[i]].pokemon5 === params[''] || users[keys[i]].pokemon6 === params['']) {
+      returnTeams[keys[i]] = users[keys[i]];
+    }
+    //    else if(users[keys[i]].name = params.search) {
+    //
+    //  }
+  }
+
+  console.log(returnTeams);
+  return respondJSON(request, response, 200, returnTeams);
 };
 
 
@@ -31,6 +46,7 @@ const getUsersMeta = (request, response) => {
 };
 
 
+// post stuff should make submit not take to another page
 const addUser = (request, response, body) => {
   const responseJSON = {
     message: 'Team Name and 6 Pokemon are required',
@@ -42,12 +58,11 @@ const addUser = (request, response, body) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  //check for duplicate team names
+  // check for duplicate team names
   if (users[body.name]) {
     responseJSON.id = 'Team Name has been used already. Please choose another name.';
     return respondJSON(request, response, 400, responseJSON);
   }
-  
 
   let responseCode = 201;
 
@@ -56,8 +71,12 @@ const addUser = (request, response, body) => {
   } else {
     users[body.name] = {};
   }
+	
+	
 
   users[body.name].name = body.name;
+	
+	
   users[body.name].pokemon1 = body.pokemon1;
   users[body.name].pokemon2 = body.pokemon2;
   users[body.name].pokemon3 = body.pokemon3;
