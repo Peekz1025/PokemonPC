@@ -12,7 +12,7 @@ const urlStruct = {
     '/style.css': htmlHandler.getCSS,
     '/bundle.js': htmlHandler.getBundle,
     '/getUsers': jsonHandler.getUsers,
-    notFound: jsonHandler.notFound,
+    notFound: htmlHandler.notFound,
   },
   HEAD: {
     '/pokemon': jsonHandler.getPokemonMeta,
@@ -59,74 +59,3 @@ const onRequest = (request, response) => {
 
 http.createServer(onRequest).listen(port);
 console.log(`Listening on 127.0.0.1: ${port}`);
-
-
-// const handlePost = (request, response, parsedUrl) => {
-//  if (parsedUrl.pathname === '/addUser') {
-//    const res = response;
-//
-//    const body = [];
-//
-//    request.on('error', (err) => {
-//      console.dir(err);
-//      res.statusCode = 400;
-//      res.end();
-//    });
-//
-//    request.on('data', (chunk) => {
-//      body.push(chunk);
-//    });
-//
-//    request.on('end', () => {
-//      const bodyString = Buffer.concat(body).toString();
-//      const bodyParams = query.parse(bodyString);
-//
-//      jsonHandler.addUser(request, res, bodyParams);
-//    });
-//  }
-// };
-//
-// const handleGet = (request, response, parsedUrl) => {
-//  if (parsedUrl.pathname === '/') {
-//    htmlHandler.getIndex(request, response);
-//  } else if (parsedUrl.pathname === '/style.css') {
-//    htmlHandler.getCSS(request, response);
-//  } else if (parsedUrl.pathname === '/getUsers') {
-//    jsonHandler.getUsers(request, response);
-//  } else if (parsedUrl.pathname === '/notReal') {
-//    jsonHandler.notFound(request, response);
-//  } else {
-//    jsonHandler.notFound(request, response);
-//  }
-// };
-//
-// const handleHead = (request, response, parsedUrl) => {
-//  if (parsedUrl.pathname === '/getUsers') {
-//    jsonHandler.getUsersMeta(request, response);
-//  } else if (parsedUrl.pathname === '/notReal') {
-//    jsonHandler.notFoundMeta(request, response);
-//  } else {
-//    jsonHandler.notFoundMeta(request, response);
-//  }
-// };
-//
-// const onRequest = (request, response) => {
-//  const parsedUrl = url.parse(request.url);
-//
-//  //grab the query parameters (?key=value&key2=value2&etc=etc)
-//  //and parse them into a reusable object by field name
-//  const params = query.parse(parsedUrl.query);
-//
-//
-//  if (request.method === 'POST') {
-//    handlePost(request, response, parsedUrl);
-//  } else if (request.method === 'HEAD') {
-//    handleHead(request, response, parsedUrl, params);
-//  } else {
-//    handleGet(request, response, parsedUrl, params);
-//  }
-// };
-//
-// http.createServer(onRequest).listen(port);
-//
-// console.log(`Listening on 127.0.0.1: ${port}`);

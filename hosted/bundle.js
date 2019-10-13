@@ -9,7 +9,11 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
       break;
     case 201:
       //if created
-      content.innerHTML = '<b>Create</b>';
+      content.innerHTML = '<b>Created</b>';
+      break;
+    case 204:
+      //if data updated
+      content.innerHTML = '<b>Updated</b>';
       break;
     case 400:
       //if bad request
@@ -31,13 +35,13 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
     var keys = Object.keys(obj);
 
     //flexbox for search results?
-    //    let div = document.createElement('div');
-    //    div.setAttribute("class", "flex-container");
+    var divV = document.createElement('div');
+    divV.setAttribute("class", "teamsearch");
+    content.appendChild(divV);
 
     //if searched picked up anything
-    if (keys.length > 0) {
+    if (0 < keys.length && obj[keys[0]].name != undefined) {
       for (var i = 0; i < keys.length; i++) {
-        //should be < or <= ??
         if (keys[i]) {
 
           var div = document.createElement('div');
@@ -58,7 +62,7 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
           p5.innerHTML = obj[keys[i]].pokemon5;
           p6.innerHTML = obj[keys[i]].pokemon6;
 
-          content.appendChild(div);
+          divV.appendChild(div);
           div.appendChild(h1);
           div.appendChild(p1);
           div.appendChild(p2);
@@ -120,7 +124,12 @@ var sendPost = function sendPost(e, nameForm) {
   var nameMethod = nameForm.getAttribute('method');
 
   var nameField = nameForm.querySelector('#nameField');
-  var ageField = nameForm.querySelector('#ageField');
+  var pokeField1 = nameForm.querySelector('#pokeField1');
+  var pokeField2 = nameForm.querySelector('#pokeField2');
+  var pokeField3 = nameForm.querySelector('#pokeField3');
+  var pokeField4 = nameForm.querySelector('#pokeField4');
+  var pokeField5 = nameForm.querySelector('#pokeField5');
+  var pokeField6 = nameForm.querySelector('#pokeField6');
 
   // create new Ajax request
   var xhr = new XMLHttpRequest();
@@ -133,8 +142,8 @@ var sendPost = function sendPost(e, nameForm) {
     return handleResponse(xhr, true);
   };
 
-  // build x-www-form-urlencoded formatted name/age
-  var formData = 'name=' + nameField.value + '&age=' + ageField.value;
+  // build x-www-form-urlencoded formatted teamname/pokemon1/pokemon2...
+  var formData = 'name=' + nameField.value + '&pokemon1=' + pokeField1.value + '\n    &pokemon2=' + pokeField2.value + '&pokemon3=' + pokeField3.value + '\n    &pokemon4=' + pokeField4.value + '&pokemon5=' + pokeField5.value + '\n    &pokemon6=' + pokeField6.value;
 
   xhr.send(formData);
   e.preventDefault();
@@ -142,7 +151,6 @@ var sendPost = function sendPost(e, nameForm) {
 };
 
 var init = function init() {
-  //redone with zack
   var userForm = document.querySelector('#userForm');
   var getUsers = function getUsers(e) {
     return requestUpdate(e, userForm);

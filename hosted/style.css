@@ -58,6 +58,7 @@ header {
 }
 
 .button {
+  font-family: gugi;
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -120,20 +121,34 @@ label {
   border-radius: 25px;
   border: 4px solid #555;
   background-color: #f8f8f8;
-/*
-  width: 200px;
-  height: 150px;
-*/
+  width: 400px;
+  height: 590px;
+  margin: 1em;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.5em;
   font-family: gugi;
   color: firebrick;
 }
 
+#content {
+  font-family: gugi;
+  transition: opacity 5s;
+  transition-property: opacity;
+  transition-duration: 5s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
 
+b {
+  padding: 2em;
+}
 
-
-
+.teamsearch {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 

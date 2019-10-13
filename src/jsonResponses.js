@@ -37,13 +37,14 @@ const getUsers = (request, response, params) => {
     else if (users[keys[i]].name === params['']) {
       returnTeams[keys[i]] = users[keys[i]];
     }
-    //if search bar had nothing
-//    else if (i === keys.length - 1 && returnTeams.length === 0) {
-//      for (let i = 0; i < keys.length || i < 10; i++) {
-//        let rand = Math.floor(Math.random() * keys.length);
-//        returnTeams[keys[i]] = users[keys[rand]];
-//      }
-//    }
+  }
+
+  // if search bar had nothing, print out 10 teams
+  var count = Object.keys(returnTeams).length;
+  if (count === 0) {
+    for (let i = 0; i < keys.length || i < 10; i++) {
+      returnTeams[keys[i]] = users[keys[i]];
+    }
   }
 
   console.log(returnTeams);

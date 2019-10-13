@@ -5,7 +5,10 @@ const handleResponse = (xhr, parseResponse) => {
       content.innerHTML = `<b>Success</b>`;
       break;
     case 201: //if created
-      content.innerHTML = '<b>Create</b>';
+      content.innerHTML = '<b>Created</b>';
+      break;
+    case 204: //if data updated
+      content.innerHTML = '<b>Updated</b>';
       break;
     case 400: //if bad request
       content.innerHTML = `<b>Bad Request</b>`;
@@ -18,19 +21,19 @@ const handleResponse = (xhr, parseResponse) => {
       break;
   }
 
-
   if (parseResponse) {
     const obj = JSON.parse(xhr.response);
 
     let keys = Object.keys(obj);
-    
+
     //flexbox for search results?
-    //    let div = document.createElement('div');
-    //    div.setAttribute("class", "flex-container");
+    let divV = document.createElement('div');
+    divV.setAttribute("class", "teamsearch");
+    content.appendChild(divV);
 
     //if searched picked up anything
-    if (keys.length > 0) {
-      for (let i = 0; i < keys.length; i++) {      //should be < or <= ??
+    if (0 < keys.length && obj[keys[0]].name != undefined) {
+      for (let i = 0; i < keys.length; i++) {
         if (keys[i]) {
 
           let div = document.createElement('div');
@@ -51,7 +54,7 @@ const handleResponse = (xhr, parseResponse) => {
           p5.innerHTML = obj[keys[i]].pokemon5;
           p6.innerHTML = obj[keys[i]].pokemon6;
 
-          content.appendChild(div);
+          divV.appendChild(div);
           div.appendChild(h1);
           div.appendChild(p1);
           div.appendChild(p2);
@@ -109,7 +112,12 @@ const sendPost = (e, nameForm) => {
   const nameMethod = nameForm.getAttribute('method');
 
   const nameField = nameForm.querySelector('#nameField');
-  const ageField = nameForm.querySelector('#ageField');
+  const pokeField1 = nameForm.querySelector('#pokeField1');
+  const pokeField2 = nameForm.querySelector('#pokeField2');
+  const pokeField3 = nameForm.querySelector('#pokeField3');
+  const pokeField4 = nameForm.querySelector('#pokeField4');
+  const pokeField5 = nameForm.querySelector('#pokeField5');
+  const pokeField6 = nameForm.querySelector('#pokeField6');
 
   // create new Ajax request
   const xhr = new XMLHttpRequest();
@@ -120,8 +128,11 @@ const sendPost = (e, nameForm) => {
   xhr.setRequestHeader('Accept', 'application/json');
   xhr.onload = () => handleResponse(xhr, true);
 
-  // build x-www-form-urlencoded formatted name/age
-  const formData = `name=${nameField.value}&age=${ageField.value}`;
+  // build x-www-form-urlencoded formatted teamname/pokemon1/pokemon2...
+  const formData = `name=${nameField.value}&pokemon1=${pokeField1.value}
+    &pokemon2=${pokeField2.value}&pokemon3=${pokeField3.value}
+    &pokemon4=${pokeField4.value}&pokemon5=${pokeField5.value}
+    &pokemon6=${pokeField6.value}`;
 
   xhr.send(formData);
   e.preventDefault();
@@ -130,7 +141,6 @@ const sendPost = (e, nameForm) => {
 
 
 const init = () => {
-  //redone with zack
   const userForm = document.querySelector('#userForm');
   const getUsers = (e) => requestUpdate(e, userForm);
 
