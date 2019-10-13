@@ -27,44 +27,48 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
 
   if (parseResponse) {
     var obj = JSON.parse(xhr.response);
-    console.dir(obj);
 
-    //think i have to parse messages here
-    var div = document.createElement('div');
-    var h1 = document.createElement('h1');
-    var p1 = document.createElement('p');
-    var p2 = document.createElement('p');
-    var p3 = document.createElement('p');
-    var p4 = document.createElement('p');
-    var p5 = document.createElement('p');
-    var p6 = document.createElement('p');
+    var keys = Object.keys(obj);
+
+    //flexbox for search results?
+    //    let div = document.createElement('div');
+    //    div.setAttribute("class", "flex-container");
 
     //if searched picked up anything
-    if (obj[0]) {
-      console.log("here");
-      h1.innerHTML = obj[0].name;
-      p1.innerHTML = obj[0].pokemon1;
-      p2.innerHTML = obj[0].pokemon2;
-      p3.innerHTML = obj[0].pokemon3;
-      p4.innerHTML = obj[0].pokemon4;
-      p5.innerHTML = obj[0].pokemon5;
-      p6.innerHTML = obj[0].pokemon6;
+    if (keys.length > 0) {
+      for (var i = 0; i < keys.length; i++) {
+        //should be < or <= ??
+        if (keys[i]) {
+
+          var div = document.createElement('div');
+          div.setAttribute("id", "returnedTeam");
+          var h1 = document.createElement('h1');
+          var p1 = document.createElement('p');
+          var p2 = document.createElement('p');
+          var p3 = document.createElement('p');
+          var p4 = document.createElement('p');
+          var p5 = document.createElement('p');
+          var p6 = document.createElement('p');
+
+          h1.innerHTML = obj[keys[i]].name;
+          p1.innerHTML = obj[keys[i]].pokemon1;
+          p2.innerHTML = obj[keys[i]].pokemon2;
+          p3.innerHTML = obj[keys[i]].pokemon3;
+          p4.innerHTML = obj[keys[i]].pokemon4;
+          p5.innerHTML = obj[keys[i]].pokemon5;
+          p6.innerHTML = obj[keys[i]].pokemon6;
+
+          content.appendChild(div);
+          div.appendChild(h1);
+          div.appendChild(p1);
+          div.appendChild(p2);
+          div.appendChild(p3);
+          div.appendChild(p4);
+          div.appendChild(p5);
+          div.appendChild(p6);
+        }
+      }
     }
-    //no results returned, pirnt out 10 random teams
-    //    else{
-    //		
-    //	}
-
-    content.appendChild(div);
-    div.appendChild(h1);
-    div.appendChild(p1);
-    div.appendChild(p2);
-    div.appendChild(p3);
-    div.appendChild(p4);
-    div.appendChild(p5);
-    div.appendChild(p6);
-
-    console.log(obj[0]);
 
     //if message in response, add to screen
     if (obj.message) {
@@ -73,7 +77,6 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
       content.appendChild(p);
     }
 
-    //added
     //if users in response, add to screen
     if (obj.users) {
       var userList = document.createElement('p');

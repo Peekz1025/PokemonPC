@@ -1,8 +1,10 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  background-image: url(https://people.rit.edu/rdp6158/media/pokeball_background_3_2.png);
 }
 
 #top {
@@ -19,3 +21,119 @@ html, body {
   font-size: 2em;
   text-align: center;
 }
+
+input[type=text] {
+  width: 150px;
+  height: 60px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 4px solid #555;
+}
+
+#searchField {
+  background-color: #f8f8f8;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+  width: 400px;
+}
+
+header {
+  font-size: 4em;
+  font-family: gugi;
+  text-align: center;
+  width: 100%;
+  color: firebrick;
+  text-shadow: 2px 2px #999;
+
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: firebrick;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 2px 9px #999;
+  margin-left: 1.5em;
+}
+
+.button:hover {
+  background-color: darkred
+}
+
+.button:active {
+  background-color: darkred;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+h2 {
+  font-size: 2em;
+  font-family: gugi;
+  text-align: center;
+  width: 100%;
+  color: firebrick;
+  text-shadow: 2px 2px #999;
+}
+
+#nameForm {
+  float: center;
+}
+
+#userForm {
+  float: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pokeRow {
+  margin: 1.5em;
+}
+
+label {
+  margin: 1.5em;
+}
+
+
+#returnedTeam {
+  border-radius: 25px;
+  border: 4px solid #555;
+  background-color: #f8f8f8;
+/*
+  width: 200px;
+  height: 150px;
+*/
+}
+
+h1 {
+  font-size: 2em;
+  font-family: gugi;
+  color: firebrick;
+}
+
+
+
+
+
+

@@ -11,7 +11,9 @@ const respondJSON = (request, response, status, object) => {
 
 
 const respondJSONMeta = (request, response, status) => {
-  response.writeHead(status, { 'Content-Type': 'application/json' });
+  response.writeHead(status, {
+    'Content-Type': 'application/json',
+  });
   response.end();
 };
 
@@ -26,14 +28,22 @@ const getUsers = (request, response, params) => {
   // loops through the users and checks if there is a team with those
   for (let i = 0; i < keys.length; i++) {
     // if the search bar had a pokemon
-    if (users[keys[i]].pokemon1 === params[''] || users[keys[i]].pokemon2 === params['']
-       || users[keys[i]].pokemon3 === params[''] || users[keys[i]].pokemon4 === params['']
-       || users[keys[i]].pokemon5 === params[''] || users[keys[i]].pokemon6 === params['']) {
+    if (users[keys[i]].pokemon1 === params[''] || users[keys[i]].pokemon2 === params[''] ||
+      users[keys[i]].pokemon3 === params[''] || users[keys[i]].pokemon4 === params[''] ||
+      users[keys[i]].pokemon5 === params[''] || users[keys[i]].pokemon6 === params['']) {
       returnTeams[keys[i]] = users[keys[i]];
     }
-    //    else if(users[keys[i]].name = params.search) {
-    //
-    //  }
+    // id the search bar had a team name
+    else if (users[keys[i]].name === params['']) {
+      returnTeams[keys[i]] = users[keys[i]];
+    }
+    //if search bar had nothing
+//    else if (i === keys.length - 1 && returnTeams.length === 0) {
+//      for (let i = 0; i < keys.length || i < 10; i++) {
+//        let rand = Math.floor(Math.random() * keys.length);
+//        returnTeams[keys[i]] = users[keys[rand]];
+//      }
+//    }
   }
 
   console.log(returnTeams);
@@ -52,8 +62,8 @@ const addUser = (request, response, body) => {
     message: 'Team Name and 6 Pokemon are required',
   };
 
-  if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3
-  || !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
+  if (!body.name || !body.pokemon1 || !body.pokemon2 || !body.pokemon3 ||
+    !body.pokemon4 || !body.pokemon5 || !body.pokemon6) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -71,12 +81,9 @@ const addUser = (request, response, body) => {
   } else {
     users[body.name] = {};
   }
-	
-	
+
 
   users[body.name].name = body.name;
-	
-	
   users[body.name].pokemon1 = body.pokemon1;
   users[body.name].pokemon2 = body.pokemon2;
   users[body.name].pokemon3 = body.pokemon3;
