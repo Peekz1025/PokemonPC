@@ -6,7 +6,6 @@ const bundle = fs.readFileSync(`${__dirname}/../hosted/bundle.js`);
 const notFoundPage = fs.readFileSync(`${__dirname}/../hosted/404.html`);
 
 
-
 const getIndex = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
   response.write(index);

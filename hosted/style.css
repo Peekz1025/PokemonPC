@@ -152,3 +152,34 @@ b {
   flex-wrap: wrap;
 }
 
+#secondPage {
+  border-radius: 25px;
+  border: 4px solid #555;
+  background-color: #f8f8f8;
+  width: 350px;
+  height: 200px;
+  margin-left: 5em;
+}
+
+#move {
+    margin-left: 1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
