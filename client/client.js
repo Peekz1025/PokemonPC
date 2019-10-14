@@ -21,12 +21,13 @@ const handleResponse = (xhr, parseResponse) => {
       break;
   }
 
+  //if response was sent
   if (parseResponse) {
     const obj = JSON.parse(xhr.response);
 
     let keys = Object.keys(obj);
 
-    //flexbox for search results?
+    //flexbox for search results
     let divV = document.createElement('div');
     divV.setAttribute("class", "teamsearch");
     content.appendChild(divV);
@@ -36,6 +37,7 @@ const handleResponse = (xhr, parseResponse) => {
       for (let i = 0; i < keys.length; i++) {
         if (keys[i]) {
 
+          //creates elements for all the teams and adds them to page
           let div = document.createElement('div');
           div.setAttribute("id", "returnedTeam");
           let h1 = document.createElement('h1');
@@ -86,7 +88,6 @@ const handleResponse = (xhr, parseResponse) => {
 };
 
 const requestUpdate = (e, userForm) => {
-  //const url = userForm.querySelector('#urlField').value;
   //change to head to perform a head request instead
   const method = 'get';
 
@@ -106,7 +107,7 @@ const requestUpdate = (e, userForm) => {
   return false;
 };
 
-//function to send our post request
+//function to send post request, used when adding teams
 const sendPost = (e, nameForm) => {
   const nameAction = nameForm.getAttribute('action');
   const nameMethod = nameForm.getAttribute('method');
@@ -139,7 +140,7 @@ const sendPost = (e, nameForm) => {
   return false;
 };
 
-
+//basic init function
 const init = () => {
   const userForm = document.querySelector('#userForm');
   const getUsers = (e) => requestUpdate(e, userForm);

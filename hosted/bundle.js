@@ -29,12 +29,13 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
       break;
   }
 
+  //if response was sent
   if (parseResponse) {
     var obj = JSON.parse(xhr.response);
 
     var keys = Object.keys(obj);
 
-    //flexbox for search results?
+    //flexbox for search results
     var divV = document.createElement('div');
     divV.setAttribute("class", "teamsearch");
     content.appendChild(divV);
@@ -44,6 +45,7 @@ var handleResponse = function handleResponse(xhr, parseResponse) {
       for (var i = 0; i < keys.length; i++) {
         if (keys[i]) {
 
+          //creates elements for all the teams and adds them to page
           var div = document.createElement('div');
           div.setAttribute("id", "returnedTeam");
           var h1 = document.createElement('h1');

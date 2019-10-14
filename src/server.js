@@ -6,6 +6,7 @@ const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
+// URL Struct to handle the responces
 const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
@@ -28,6 +29,7 @@ const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
   const params = query.parse(parsedUrl.query);
 
+  // if trying to add a new team
   if (parsedUrl.pathname === '/addUser') {
     const res = response;
 
@@ -52,6 +54,7 @@ const onRequest = (request, response) => {
   } else if (urlStruct[request.method][parsedUrl.pathname]) {
     urlStruct[request.method][parsedUrl.pathname](request, response, params);
   } else {
+    // goes to 404 page if page not found
     urlStruct[request.method].notFound(request, response);
   }
 };
